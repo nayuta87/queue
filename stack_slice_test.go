@@ -14,13 +14,13 @@ func NewSliceStack() (s *SliceStack) {
 	return &SliceStack{s: make([]interface{}, 0)}
 }
 
-func (s *SliceStack) Enq(v interface{}) {
+func (s *SliceStack) Push(v interface{}) {
 	s.mu.Lock()
 	s.s = append(s.s, v)
 	s.mu.Unlock()
 }
 
-func (s *SliceStack) Deq() interface{} {
+func (s *SliceStack) Pop() interface{} {
 	s.mu.Lock()
 	if len(s.s) == 0 {
 		s.mu.Unlock()
@@ -33,15 +33,15 @@ func (s *SliceStack) Deq() interface{} {
 }
 
 func ExampleSliceStack() {
-	q := NewSliceStack()
+	s := NewSliceStack()
 
-	q.Enq("1st item")
-	q.Enq("2nd item")
-	q.Enq("3rd item")
+	s.Push("1st item")
+	s.Push("2nd item")
+	s.Push("3rd item")
 
-	fmt.Println(q.Deq())
-	fmt.Println(q.Deq())
-	fmt.Println(q.Deq())
+	fmt.Println(s.Pop())
+	fmt.Println(s.Pop())
+	fmt.Println(s.Pop())
 	// Output:
 	// 3rd item
 	// 2nd item

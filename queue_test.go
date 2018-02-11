@@ -27,7 +27,7 @@ type queueInterface interface {
 	Deq() interface{}
 }
 
-func run(inputs []int, q queueInterface) (outputs []interface{}) {
+func runQueueInterface(inputs []int, q queueInterface) (outputs []interface{}) {
 	for _, v := range inputs {
 		if v >= 0 {
 			q.Enq(v)
@@ -39,11 +39,11 @@ func run(inputs []int, q queueInterface) (outputs []interface{}) {
 }
 
 func runQueue(inputs []int) (outputs []interface{}) {
-	return run(inputs, NewQueue())
+	return runQueueInterface(inputs, NewQueue())
 }
 
 func runSliceQueue(inputs []int) (outputs []interface{}) {
-	return run(inputs, NewSliceQueue())
+	return runQueueInterface(inputs, NewSliceQueue())
 }
 
 func TestMatchWithSliceQueue(t *testing.T) {
