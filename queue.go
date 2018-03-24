@@ -1,4 +1,8 @@
-package pool
+// Package queue provides a lock-free queue.
+// The underlying algorithm is one proposed by Michael and Scott.
+// https://doi.org/10.1145/248052.248106
+//
+package queue
 
 import (
 	"sync/atomic"
